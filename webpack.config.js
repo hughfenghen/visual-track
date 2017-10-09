@@ -5,6 +5,7 @@ const DIST_PATH = path.resolve(__dirname, './dist')
 module.exports = {
   entry: {
     index: './src/track-controller.js',
+    autotrack: './src/autotrack.js',
   },
   output: {
     // 打包输出的目录，这里是绝对路径，必选设置项
@@ -12,7 +13,7 @@ module.exports = {
     // 资源基础路径
     // publicPath: '/dist',
     // 打包输出的文件名
-    filename: 'index.js'
+    filename: '[name].js'
   },
   module: {
     rules: [
