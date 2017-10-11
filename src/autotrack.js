@@ -40,7 +40,7 @@ function genViewHandle() {
       .filter(([path, el]) => el && elementInViewport(el))
       .forEach(([path, el]) => {
         dispatchEvent({})
-        // 节点曝光后应当删除 触发多次曝光时间
+        // 节点曝光后应当删除 避免触发多次曝光事件
         const idx = paths.findIndex(p => p === path)
         paths.splice(idx, 1)
         console.log('catch view!!!', e)
@@ -76,6 +76,6 @@ function elementInViewport(el) {
   document.body.addEventListener('touchstart', handleClick, true)
 
   const handleView = genViewHandle()
-  document.addEventListener("DOMContentLoaded", handleView)
+  document.addEventListener("load", handleView)
   document.addEventListener("scroll", handleView)
 })()
