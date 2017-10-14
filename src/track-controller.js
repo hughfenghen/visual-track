@@ -1,4 +1,7 @@
-import viewHtml from './view.html'
+import ctrlNav from './html/ctrl-nav.html'
+import ctrlMenu from './html/ctrl-menu.html'
+import { htmlToElement } from './utils'
+import './html/ctrl.css'
 
 const Doc = document
 
@@ -6,9 +9,18 @@ const cover = createCoverElement(Doc)
 Doc.body.appendChild(cover)
 
 cover.addEventListener('click', (e) => {
+  e.preventDefault()
+  e.stopPropagation()
+
   cover.style.display = 'none'
   const target = Doc.elementFromPoint(e.clientX, e.clientY)
-  target.style.border = '1px solid red'
+  target.classList.add('ctrl--selected')
+
+  const { top, left } = target.getBoundingClientRect()
+  const menu = createMenu()
+  target.appendChild(menu)
+  menu.style.top = top
+  menu.style.left = left
 })
 
 function createCoverElement() {
@@ -22,15 +34,20 @@ function createCoverElement() {
   return e
 }
 
-function addRecord() {
-  cover.style.display = 'block'
+function createMenu() {
+  const menu = htmlToElement(ctrlMenu)
+
+  menu.querySelector('#ctrl-menu-remove')
+    .addEventListener('click', function() {
+      this.parentNode.parentNode.classList.remove('ctrl--selected')
+      this.parentNode.remove()
+
+  return menu
 }
 
 (function initView() {
-  const fragment = Doc.createElement('div')
-  fragment.innerHTML = viewHtml
-  Doc.body.insertBefore(fragment, Doc.body.firstChild)
+  Doc.body.insertAdjacentHTML('afterbegin', ctrlNav)
   Doc.querySelector('.add-track').addEventListener('click', () => {
-    addRecord()
+    cover.style.display = 'block'
   })
 })()

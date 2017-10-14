@@ -73,7 +73,7 @@ function elementInViewport(el) {
 
   const handleClick = genClickHandle()
   document.body.addEventListener('click', handleClick, true)
-  document.body.addEventListener('touchstart', handleClick, true)
+  // document.body.addEventListener('touchstart', handleClick, true)
 
   const handleView = genViewHandle()
   document.addEventListener("load", handleView)

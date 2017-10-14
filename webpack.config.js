@@ -21,8 +21,8 @@ module.exports = {
         test: /\.css$/,
         // 指定多个loader
         use: [
+          'style-loader',
           'css-loader',
-          'style-loader'
         ]
       },
       {

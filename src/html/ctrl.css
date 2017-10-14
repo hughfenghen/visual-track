@@ -1,0 +1,14 @@
+.ctrl-menu {
+  position: fixed;
+  opacity: .75;
+}
+.ctrl-menu_btn {
+  border: none;
+  background-color: #3f95e0;
+  font-weight: bold;
+  color: #fff;
+}
+
+.ctrl--selected {
+  border: 1px solid red;
+}
