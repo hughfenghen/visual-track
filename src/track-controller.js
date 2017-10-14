@@ -23,7 +23,7 @@ cover.addEventListener('click', (e) => {
   menu.style.left = left
 })
 
-function createCoverElement() {
+function createCoverElement () {
   const e = Doc.createElement('div')
   e.id = 'cover'
   e.style.display = 'none'
@@ -34,20 +34,21 @@ function createCoverElement() {
   return e
 }
 
-function createMenu() {
+function createMenu () {
   const menu = htmlToElement(ctrlMenu)
 
   menu.querySelector('#ctrl-menu-remove')
-    .addEventListener('click', function() {
+    .addEventListener('click', function () {
       this.parentNode.parentNode.classList.remove('ctrl--selected')
       this.parentNode.remove()
-
+    })
   return menu
 }
 
-(function initView() {
+(function initView () {
   Doc.body.insertAdjacentHTML('afterbegin', ctrlNav)
-  Doc.querySelector('.add-track').addEventListener('click', () => {
-    cover.style.display = 'block'
-  })
+  Doc.querySelector('.add-track')
+    .addEventListener('click', () => {
+      cover.style.display = 'block'
+    })
 })()

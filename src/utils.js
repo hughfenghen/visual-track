@@ -1,4 +1,4 @@
-export function getNodePath(el) {
+export function getNodePath (el) {
   const getAllParent = (node, ps) => {
     ps.push(node.tagName)
     return node.tagName === 'HTML' ? ps : getAllParent(node.parentNode, ps)
@@ -11,8 +11,8 @@ export function getNodePath(el) {
  * @param {String} HTML representing a single element
  * @return {Element}
  */
-export function htmlToElement(html) {
-    var template = document.createElement('template');
-    template.innerHTML = html;
-    return template.content.firstChild;
+export function htmlToElement (html) {
+  var template = document.createElement('template')
+  template.innerHTML = html
+  return template.content.firstChild
 }
