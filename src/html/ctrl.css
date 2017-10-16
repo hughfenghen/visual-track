@@ -1,5 +1,5 @@
 .ctrl-menu {
-  position: fixed;
+  position: absolute;
   opacity: .75;
 }
 .ctrl-menu_btn {
@@ -9,6 +9,38 @@
   color: #fff;
 }
 
-.ctrl--selected {
+.ctrl-element--selected {
   border: 1px solid red;
+}
+.ctrl-element--actived {
+  border: 1px solid blue;
+}
+
+.ctrl-modal {
+  position: fixed;
+  min-width: 230px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 5px 5px 5px 0px #eee;
+}
+
+.ctrl-modal .ctrl-modal-form dd {
+  margin-left: 20px;
+}
+
+.ctrl-modal .ctrl-modal-form input {
+  border: 1px solid #eee;
+}
+
+.ctrl-modal-footer {
+  text-align: right;
+}
+
+.ctrl-modal-form {
+  margin: 0;
 }

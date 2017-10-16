@@ -1,14 +1,22 @@
-<div>
-  <p>新建/编辑埋点</p>
-  <dl>
-    <dt>时间名称</dt>
-    <dd><input type="text"></dd>
-    <dt>事件类型</dt>
-    <dd>
-      <input type="checkbox" id="type-click"><label for="type-click">点击</label>
-      <input type="checkbox" id="type-view"><label for="type-view">曝光</label>
-    </dd>
-    <dt>可选属性</dt>
-    <dd></dd>
-  </dl>
+<div class="ctrl-modal">
+  <div>新建/编辑埋点</div>
+  <hr>
+  <form class="ctrl-modal-form" onsubmit="return false;">
+    <dl>
+      <dt>事件名称</dt>
+      <dd><input name="event_name" type="text"></dd>
+      <dt>事件类型</dt>
+      <dd>
+        <input name="event_type" value="click" type="checkbox" id="type-click"><label for="type-click">点击</label>
+        <input name="event_type" value="view" type="checkbox" id="type-view"><label for="type-view">曝光</label>
+      </dd>
+      <dt>可选属性</dt>
+      <dd></dd>
+    </dl>
+    <hr>
+    <div class="ctrl-modal-footer">
+      <button type="button" name="cancel">取消</button>
+      <input type="submit" value="确定">
+    </div>
+  </form>
 </div>
