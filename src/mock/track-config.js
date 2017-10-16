@@ -2,11 +2,26 @@ export default [
   {
     name: '点击header',
     type: 'click',
-    nodePath: 'html body header'
+    xpath: 'html body header'
+  },
+  {
+    name: '3',
+    type: 'click',
+    xpath: '/html/body/section/ul/li[3]'
+  },
+  {
+    name: 'def',
+    type: 'click',
+    xpath: '//*[@id="xt"]/a'
+  },
+  {
+    name: '456',
+    type: 'click',
+    xpath: '/html/body/section/div[2]/a[2]'
   },
   {
     name: '看见footer',
     type: 'view',
-    nodePath: 'html body footer'
+    xpath: 'html body footer'
   }
 ]

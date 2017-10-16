@@ -1,7 +1,7 @@
 import ctrlNav from './html/ctrl-nav.html'
 import ctrlMenu from './html/ctrl-menu.html'
 import editModalHtml from './html/edit-modal.html'
-import { htmlToElement } from './utils'
+import { htmlToElement, getElementXPath } from './utils'
 import './html/ctrl.css'
 
 const Doc = document
@@ -74,6 +74,7 @@ function submit (target, editModal) {
   const form = editModal.querySelector('form')
   const { event_name, event_type } = form.elements
   console.log(22222, target, event_name.value, Array.from(event_type).filter(e => e.checked).map(e => e.value))
+  console.log(33333, getElementXPath(target))
   target.classList.remove('ctrl-element--selected')
   target.classList.add('ctrl-element--actived')
 

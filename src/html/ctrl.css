@@ -27,6 +27,7 @@
   border-radius: 10px;
   padding: 10px;
   box-shadow: 5px 5px 5px 0px #eee;
+  background-color: #fff;
 }
 
 .ctrl-modal .ctrl-modal-form dd {

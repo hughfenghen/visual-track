@@ -1,15 +1,3 @@
-export function getNodePath (el) {
-  const getAllParent = (node, ps) => {
-    ps.push(node.tagName)
-    return node.tagName === 'HTML' ? ps : getAllParent(node.parentNode, ps)
-  }
-
-  return getAllParent(el, [])
-    .reverse()
-    .map(tagName => tagName.toLowerCase())
-    .join(' ')
-}
-
 /**
  * @param {String} HTML representing a single element
  * @return {Element}
@@ -21,7 +9,7 @@ export function htmlToElement (html) {
 }
 
 /**
- * 获取节点的XPath  XPath由id、标签名、索引构成
+ * 递归获取节点的XPath  XPath由id、标签名、索引构成
  * @param  {Element} element element
  * @return {string}         element XPath表达式
  */

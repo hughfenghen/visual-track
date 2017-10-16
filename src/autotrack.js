@@ -1,4 +1,4 @@
-import { getNodePath } from './utils'
+import { getElementXPath } from './utils'
 import mockCfg from './mock/track-config'
 
 const subscribers = new Set([])
@@ -27,11 +27,11 @@ export function dispatchEvent (e) {
 function genClickHandle () {
   const clickItems = config.filter(({ type }) => type === 'click')
   return function (e) {
-    const elPath = getNodePath(e.target)
-    const cfgData = clickItems.find(({ nodePath }) => nodePath === elPath)
+    const path = getElementXPath(e.target)
+    const cfgData = clickItems.find(({ xpath }) => xpath === path)
     if (cfgData) {
       dispatchEvent({})
-      console.log('catch click!!!', elPath)
+      console.log('catch click!!!', path)
     }
   }
 }
@@ -41,6 +41,7 @@ function genViewHandle () {
   const paths = viewItems.map(({ nodePath }) => nodePath)
   return function (e) {
     paths
+      // todo document.eval
       .map(p => [p, document.querySelector(p)])
       .filter(([path, el]) => el && elementInViewport(el))
       .forEach(([path, el]) => {
