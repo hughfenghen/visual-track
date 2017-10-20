@@ -47,6 +47,7 @@ function genViewHandle () {
       // 未触发过曝光事件 且 在可视区域内
       .filter(el => !viewed.has(el) && elementInViewport(el))
       .forEach((el) => {
+        console.log('catch view!!!', el)
         dispatchEvent({})
         viewed.add(el)
       })
@@ -60,6 +61,6 @@ function genViewHandle () {
   document.body.addEventListener('click', handleClick, true)
 
   const handleView = genViewHandle()
-  document.addEventListener('load', handleView)
-  document.addEventListener('scroll', handleView)
+  window.addEventListener('load', handleView)
+  window.addEventListener('scroll', handleView)
 })()
