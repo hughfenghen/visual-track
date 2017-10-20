@@ -26,5 +26,13 @@
     <footer>footer</footer>
     <script src="index.js"></script>
     <script src="autotrack.js"></script>
+    <script>
+      const li = document.createElement('li')
+      li.innerHTML = 5
+      setTimeout(() => {
+        document.querySelector('ul')
+          .appendChild(li)
+      }, 1500)
+    </script>
   </body>
 </html>

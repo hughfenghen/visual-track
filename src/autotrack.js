@@ -40,6 +40,7 @@ function genViewHandle () {
   const viewItems = config.filter(({ type }) => type === 'view')
   const paths = viewItems.map(({ xpath }) => xpath)
   const viewed = new Set()
+  // fixme: 无法捕获在当前页面动态插入dom元素的曝光事件 mock：/html/body/section/ul/li[5]
   return function (e) {
     paths
       .map(p => getElementOfXPath(p))

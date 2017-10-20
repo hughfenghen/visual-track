@@ -15,6 +15,16 @@ export default [
     xpath: '/html/body/section/ul/li[3]'
   },
   {
+    name: '5',
+    type: 'click',
+    xpath: '/html/body/section/ul/li[5]'
+  },
+  {
+    name: '5',
+    type: 'view',
+    xpath: '/html/body/section/ul/li[5]'
+  },
+  {
     name: 'def',
     type: 'click',
     xpath: '//*[@id="xt"]/a'
