@@ -2,7 +2,7 @@ export default [
   {
     name: '点击header',
     type: 'click',
-    xpath: 'html body header'
+    xpath: '/html/body/header'
   },
   {
     name: '3',
@@ -22,6 +22,6 @@ export default [
   {
     name: '看见footer',
     type: 'view',
-    xpath: 'html body footer'
+    xpath: '/html/body/footer'
   }
 ]

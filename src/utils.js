@@ -17,7 +17,7 @@ export function getElementXPath (element) {
   if (!element) return null
 
   if (element.id) {
-    return '//*[@id="' + element.id + '"]'
+    return `//*[@id=${element.id}]`
   } else if (element.tagName === 'BODY') {
     return '/html/body'
   } else {
@@ -30,4 +30,45 @@ export function getElementXPath (element) {
       element.tagName.toLowerCase() +
       (sameTagSiblings.length > 1 ? `[${idx + 1}]` : '')
   }
+}
+
+/**
+ * 通过xpath获取dom元素
+ * @param  {string} xpath path
+ * @return {Array}       所有匹配的dom元素
+ */
+export function getElementOfXPath (xpath) {
+  const rs = []
+  const headings = document.evaluate(xpath, document, null, XPathResult.ANY_TYPE, null)
+  let thisHeading = headings.iterateNext()
+  while (thisHeading) {
+    rs.push(thisHeading)
+    thisHeading = headings.iterateNext()
+  }
+  return rs
+}
+
+/**
+ * 元素是否在可见区域中
+ * @param  {Element} el dom元素
+ * @return {boolean}
+ */
+export function elementInViewport (el) {
+  let top = el.offsetTop
+  let left = el.offsetLeft
+  const width = el.offsetWidth
+  const height = el.offsetHeight
+
+  while (el.offsetParent) {
+    el = el.offsetParent
+    top += el.offsetTop
+    left += el.offsetLeft
+  }
+
+  return (
+    top < window.pageYOffset + window.innerHeight &&
+    left < window.pageXOffset + window.innerWidth &&
+    top + height > window.pageYOffset &&
+    left + width > window.pageXOffset
+  )
 }
