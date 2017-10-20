@@ -67,6 +67,7 @@ function pickElement (target) {
         .addEventListener('click', () => { editModal.remove() })
 
       Doc.body.appendChild(editModal)
+      console.log(5555, snifferData(target))
     })
 }
 
@@ -79,4 +80,30 @@ function submit (target, editModal) {
   target.classList.add('ctrl-element--actived')
 
   editModal.remove()
+}
+
+function snifferData (el) {
+  const rs = {}
+  Object.entries(el.dataset)
+    .filter(([k]) => k.startsWith('track'))
+    .forEach(([k, v]) => { rs[k] = v })
+
+  if (['SPAN', 'A', 'P'].includes(el.tagName)) {
+    rs.text = el.innerHTML
+  }
+
+  switch (el.tagName) {
+    case 'A':
+      rs.href = el.getAttribute('href')
+      rs.text = el.innerHTML
+      break
+    case 'SPAN':
+    case 'P':
+      rs.text = el.innerHTML
+      break
+    case 'IMG':
+      rs.src = el.getAttribute('src')
+  }
+
+  return rs
 }
