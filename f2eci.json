@@ -1,0 +1,24 @@
+{
+  "scripts": {
+    "build": "npm run build",
+    "postpublish": ""
+  },
+  "dist": "./dist",
+  "env": "dev",
+  "urlPrefix": "./",
+  "static-src": "static",
+  "yarn": true,
+  "ignoreJsMin": true,
+  "hosts": {
+    "static": {
+      "beta": "s1.51ping.com",
+      "ppe": "",
+      "product": "osx.dpfile.com"
+    },
+    "html": {
+      "beta": "osx.51ping.com",
+      "ppe": "",
+      "product": "osx.dianping.com"
+    }
+  }
+}

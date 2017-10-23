@@ -6,9 +6,12 @@
   "license": "MIT",
   "scripts": {
     "cp-html": "cp example/demo.html dist",
-    "dev": "npm run cp-html && webpack-dev-server --progress --quiet --hot --inline --host 0.0.0.0 --config ./webpack.config.js"
+    "build": "webpack --progress --hide-modules --bail --profile --config ./webpack.config.js",
+    "dev": "webpack-dev-server --progress --quiet --hot --inline --host 0.0.0.0 --config ./webpack.config.js"
   },
   "devDependencies": {
+    "clean-webpack-plugin": "^0.1.17",
+    "copy-webpack-plugin": "^4.2.0",
     "css-loader": "^0.28.7",
     "eslint": "^4.8.0",
     "eslint-config-standard": "^10.2.1",
