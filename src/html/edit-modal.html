@@ -7,11 +7,25 @@
       <dd><input name="event_name" type="text"></dd>
       <dt>事件类型</dt>
       <dd>
-        <input name="event_type" value="click" type="checkbox" id="type-click"><label for="type-click">点击</label>
-        <input name="event_type" value="view" type="checkbox" id="type-view"><label for="type-view">曝光</label>
+        <label>
+          <input name="event_type" value="click" type="checkbox">
+          点击
+        </label>
+        <label>
+          <input name="event_type" value="view" type="checkbox">
+          曝光
+        </label>
       </dd>
       <dt>可选属性</dt>
-      <dd></dd>
+      <dd>
+        <% Object.entries(optionalAttr).forEach((pair) => { %>
+          <label>
+            <input name="custom" value="<%= pair[0] %>" type="checkbox">
+            <%= pair.join(': ') %>
+          </label>
+          <br/>
+        <% }) %>
+      </dd>
     </dl>
     <hr>
     <div class="ctrl-modal-footer">

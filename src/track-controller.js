@@ -1,3 +1,4 @@
+import { template } from 'lodash'
 import ctrlNav from './html/ctrl-nav.html'
 import ctrlMenu from './html/ctrl-menu.html'
 import editModalHtml from './html/edit-modal.html'
@@ -59,7 +60,9 @@ function pickElement (target) {
 
   menu.querySelector('#ctrl-menu-add')
     .addEventListener('click', function () {
-      const editModal = htmlToElement(editModalHtml)
+      const editModal = htmlToElement(
+        template(editModalHtml)({ optionalAttr: snifferData(target) })
+      )
 
       editModal.querySelector('input[type=submit]')
         .addEventListener('click', () => { submit(target, editModal) })
@@ -67,18 +70,22 @@ function pickElement (target) {
         .addEventListener('click', () => { editModal.remove() })
 
       Doc.body.appendChild(editModal)
-      console.log(5555, snifferData(target))
     })
 }
 
 function submit (target, editModal) {
   const form = editModal.querySelector('form')
-  const { event_name, event_type } = form.elements
-  console.log(22222, target, event_name.value, Array.from(event_type).filter(e => e.checked).map(e => e.value))
-  console.log(33333, getElementXPath(target))
+  const { event_name, event_type, custom } = form.elements
+
+  console.log({
+    name: event_name.value,
+    xpath: getElementXPath(target),
+    type: Array.from(event_type).filter(e => e.checked).map(e => e.value),
+    custom: Array.from(custom).filter(e => e.checked).map(e => e.value)
+  })
+
   target.classList.remove('ctrl-element--selected')
   target.classList.add('ctrl-element--actived')
-
   editModal.remove()
 }
 
@@ -86,12 +93,14 @@ function snifferData (el) {
   const rs = {}
   Object.entries(el.dataset)
     .filter(([k]) => k.startsWith('track'))
-    .forEach(([k, v]) => { rs[k] = v })
+    .forEach(([k, v]) => {
+      // 替换掉track，首字母小写
+      let key = k.replace(/^track/, '')
+      key = key[0].toLowerCase() + key.slice(1)
+      rs[ key ] = v
+    })
 
-  if (['SPAN', 'A', 'P'].includes(el.tagName)) {
-    rs.text = el.innerHTML
-  }
-
+  // TODO: 为各种标签配置默认属性
   switch (el.tagName) {
     case 'A':
       rs.href = el.getAttribute('href')
