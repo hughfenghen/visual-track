@@ -2,6 +2,7 @@ export default [
   {
     name: '点击header',
     type: 'click',
+    custom: ['text'],
     xpath: '/html/body/header'
   },
   {

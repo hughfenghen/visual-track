@@ -30,29 +30,42 @@ function genClickHandle () {
     const path = getElementXPath(e.target)
     const cfgData = clickItems.find(({ xpath }) => xpath === path)
     if (cfgData) {
-      dispatchEvent({})
-      console.log('catch click!!!', path)
+      dispatchEvent({
+        name: cfgData.name,
+        type: 'click',
+        // index: /[(\d+)]$/.exec(xpath)
+        custom: captureCustomData(e.target, cfgData.custom)
+      })
+      console.log('catch click!!!', cfgData)
     }
   }
 }
 
 function genViewHandle () {
   const viewItems = config.filter(({ type }) => type === 'view')
-  const paths = viewItems.map(({ xpath }) => xpath)
   const viewed = new Set()
   // fixme: 无法捕获在当前页面动态插入dom元素的曝光事件 mock：/html/body/section/ul/li[5]
   return function (e) {
-    paths
-      .map(p => getElementOfXPath(p))
-      .reduce((els, c) => els.concat(c))
-      // 未触发过曝光事件 且 在可视区域内
-      .filter(el => !viewed.has(el) && elementInViewport(el))
-      .forEach((el) => {
-        console.log('catch view!!!', el)
-        dispatchEvent({})
-        viewed.add(el)
-      })
+    viewItems.forEach(({ xpath, custom, name }) => {
+      getElementOfXPath(xpath)
+        .filter(el => !viewed.has(el) && elementInViewport(el))
+        .forEach((el) => {
+          console.log('catch view!!!', el)
+          dispatchEvent({
+            name,
+            type: 'view',
+            // index: /[(\d+)]$/.exec(xpath)
+            custom: captureCustomData(el, custom)
+          })
+          viewed.add(el)
+        })
+    })
   }
+}
+
+// TODO: 采集需要的业务字段
+function captureCustomData (el, fields) {
+
 }
 
 ;(function init () {
